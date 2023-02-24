@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Modellager
 {
-    public class Medlem
+    public class Medlem: Person
     {
-        public int ID { get; set; } 
-        public string Name { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public bool IsExpidit { get; set; }
+        public int MedlemsID { get; private set; }
 
-        public Medlem() 
+        public Medlem(int medlemsid, string fnamn, string enamn, string telenr, string email) 
         {
-        
+            MedlemsID = medlemsid;
+            Fnamn = fnamn;
+            Enamn = enamn;
+            TeleNr = telenr;
+            Email = email;
         }
     }
 }
