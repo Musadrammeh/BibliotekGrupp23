@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modellager
 {
-    public class Böcker
+    public class Böcker //byt till singular
     {
         public int ID { get; set; } 
         public string BokTitel { get; set; }    
