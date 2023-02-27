@@ -7,12 +7,12 @@ using Modellayer;
 
 namespace Affärslager
 {
-    public class ExpiditController
+    public class ExpeditController
     {
         List<string> myList = new List<string>();
         public static Expidit InloggadUser { get; set; }   
         public Expidit NyUser { get; set; }
-        public Expidit (string UserName, string Password)
+        public ExpeditController (string UserName, string Password)
         {
             IEnumerable<Expidit> Expiditer = Repository.Context.ExpiditRepository.GetALL();
             foreach(Expidit e in Expiditer)
