@@ -9,13 +9,42 @@ namespace Datalager
 {
     public class Repository<TEntity>:IRepository<TEntity> where TEntity : class
     {
-        private BibliotekContext _context = new BibliotekContext();
+        public BibliotekContext Context;
+        public Repository(BibliotekContext context)
+        {
+            Context = context;
+        }
 
-        public void Add(TEntity entity) =>_context.Add(entity);
-        public TEntity GetById(object ID) => _context.Set<TEntity>().Find(ID);
-        public IEnumerable<object> GetALL() => _context.Set<TEntity>().ToList();
-       // public void Update(TEntity entity) =>
-       public void Remove(TEntity entity) => _context.Remove(entity);
+        public void Add(TEntity entity)
+        {
+            Context.Set<TEntity>().Add(entity);
+        }
+        public void Remove(TEntity entity)
+        {
+            Context.Set<TEntity>().Remove(entity);
+        }
+
+        public TEntity Get(int id)
+        {
+            return Context.Set<TEntity>().Find(id);
+        }
+
+        public IEnumerable<TEntity> GetAll()
+        {
+            return Context.Set<TEntity>().ToList();
+        }
+
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        {
+            return Context.Set<TEntity>().Where(predicate);
+        }
+
+        public void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            Context.Set<TEntity>.RemoveRange(entities);
+        }
+
+
 
     }
 }

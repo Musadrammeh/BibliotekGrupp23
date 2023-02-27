@@ -9,24 +9,29 @@ namespace Datalager
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public Repository<Medlem> MedlemRepository { get; private set; }
-        public Repository<Bokning> BokningRepository { get; private set; }
-        public Repository<Bok> BokRepository { get; private set; }
-        public Repository<Faktura> FakturaRepository { get; private set; }
-        public Repository<Expedit> ExpeditRepository { get; private set; }
 
-        public UnitOfWork()
+        private readonly BibliotekContext _context;
+        public IExpeditRepository Expediter { get; private set; }
+        public IFakturaRepository Fakturor { get; private set; }
+        public IBokRepository Böcker { get; private set; }
+        public IBokningRepository Bokningar { get; private set; }
+        public IMedlemRepository Medlemmar { get; private set; }
+
+
+
+        public UnitOfWork(BibliotekContext context)
         {
-            MedlemRepository = new Repository<Medlem>(_context);
-            BokningRepository = new Repository<Bokning>(_context);
-            BokRepository = new Repository<Bok>(_context);
-            FakturaRepository = new Repository<Faktura>(_context);
-            Expeditpository = new Repository<Expedit>(_context);
+            _context = context;
+            Expediter = new ExpeditRepository(_context);
+            Medlemmar = new MedlemRepository(_context);
+            Böcker = new BokRepository(_context);
+            Fakturor = new FakturaRepository(_context);
+            Bokningar = new BokningRepository(_context);
+
         }
-
-        public void Save()
+            public void Save()
         {
-            _context.SaveChanges();
+            return _context.SaveChanges();
         }
 
         public void Dispose()

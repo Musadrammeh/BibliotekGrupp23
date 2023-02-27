@@ -7,9 +7,15 @@ using Modellager;
 
 namespace Datalager
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
-        void Save();
-        void Dispose();
+
+        IBokningRepository Bokningar { get; }
+        IBokRepository Böcker { get; }
+        IMedlemRepository Medlemmar { get; }
+        IFakturaRepository Fakturor { get; }
+        IExpeditRepository Expediter { get; }
+       
+        int Save();
     }
 }
